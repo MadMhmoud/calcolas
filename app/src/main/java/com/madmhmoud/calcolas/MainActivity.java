@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
 
     TextView result;
 
+    boolean isResult = false;
+
 
 
     @Override
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         result = findViewById(R.id.resultview);
 
-        View.OnClickListener l = v -> result.append(((Button)v).getText());
+        View.OnClickListener l = v -> addDigit(v);;
 
         num0.setOnClickListener(l);
         num1.setOnClickListener(l);
@@ -83,12 +85,29 @@ public class MainActivity extends AppCompatActivity {
 
         String current = String.valueOf(result.getText());
 
+        isResult = true;
 
         return String.valueOf(ExprEval.eval(current)) ;
-
     }
 
+    private void addDigit(View v) {
 
+        if(!isResult) {
+
+            result.append(((Button)v).getText());
+
+        }
+        else {
+
+            result.setText("");
+            result.append(((Button)v).getText());
+
+            isResult = false;
+
+        }
+
+
+    }
 
 
 }
