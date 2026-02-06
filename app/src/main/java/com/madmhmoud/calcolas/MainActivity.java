@@ -50,7 +50,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         Button plusbtn = findViewById(R.id.plusbtn);
+        Button multibtn = findViewById(R.id.multbtn);
         Button minusbtn = findViewById(R.id.minusbtn);
+        Button divisionbtn = findViewById(R.id.divisionbtn);
         Button equalbtn = findViewById(R.id.equalbtn);
 
         Button cleanbtn = findViewById(R.id.cleanbtn);
@@ -73,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
         minusbtn.setOnClickListener(l);
         plusbtn.setOnClickListener(l);
         dotbtn.setOnClickListener(l);
+        divisionbtn.setOnClickListener(l);
+        multibtn.setOnClickListener(l);
 
         equalbtn.setOnClickListener(v -> result.setText(solve()));
         cleanbtn.setOnClickListener(v -> result.setText(""));
