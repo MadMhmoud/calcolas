@@ -46,9 +46,13 @@ public class MainActivity extends AppCompatActivity {
         Button num1 = findViewById(R.id.num1);
         Button num0 = findViewById(R.id.num0);
 
+
         Button plusbtn = findViewById(R.id.plusbtn);
         Button minusbtn = findViewById(R.id.minusbtn);
         Button equalbtn = findViewById(R.id.equalbtn);
+
+        Button cleanbtn = findViewById(R.id.cleanbtn);
+        Button dotbtn = findViewById(R.id.dotbtn);
 
         result = findViewById(R.id.resultview);
 
@@ -66,9 +70,10 @@ public class MainActivity extends AppCompatActivity {
         num9.setOnClickListener(l);
         minusbtn.setOnClickListener(l);
         plusbtn.setOnClickListener(l);
+        dotbtn.setOnClickListener(l);
 
         equalbtn.setOnClickListener(v -> result.setText(solve()));
-
+        cleanbtn.setOnClickListener(v -> result.setText(""));
 
 
 
