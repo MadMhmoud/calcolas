@@ -50,13 +50,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         Button plusbtn = findViewById(R.id.plusbtn);
-        Button multibtn = findViewById(R.id.multbtn);
+        Button multibtn = findViewById(R.id.multibtn);
         Button minusbtn = findViewById(R.id.minusbtn);
         Button divisionbtn = findViewById(R.id.divisionbtn);
         Button equalbtn = findViewById(R.id.equalbtn);
 
         Button cleanbtn = findViewById(R.id.cleanbtn);
         Button dotbtn = findViewById(R.id.dotbtn);
+        Button backbtn = findViewById(R.id.backbtn);
 
         result = findViewById(R.id.resultview);
 
@@ -80,8 +81,21 @@ public class MainActivity extends AppCompatActivity {
 
         equalbtn.setOnClickListener(v -> result.setText(solve()));
         cleanbtn.setOnClickListener(v -> result.setText(""));
+        backbtn.setOnClickListener(v -> deleteDigit());
 
 
+
+
+    }
+
+    private void deleteDigit() {
+
+
+        if(result.getText().length() > 0) {
+
+            result.setText(result.getText().toString().substring(0, result.getText().length() - 1));
+
+        }
 
     }
 
