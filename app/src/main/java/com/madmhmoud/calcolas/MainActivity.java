@@ -91,10 +91,13 @@ public class MainActivity extends AppCompatActivity {
     private void deleteDigit() {
 
 
-        if(result.getText().length() > 0) {
+        if(result.getText().length() > 0 && !isResult) {
 
             result.setText(result.getText().toString().substring(0, result.getText().length() - 1));
 
+        } else {
+            result.setText("");
+            isResult = false;
         }
 
     }
@@ -102,10 +105,38 @@ public class MainActivity extends AppCompatActivity {
     private String solve() {
 
         String current = String.valueOf(result.getText());
+        boolean isnumber = false;
 
-        isResult = true;
 
-        return String.valueOf(ExprEval.eval(current)) ;
+        for (int i = 0 ; i < current.length() ; i++) {
+
+            if (!(current.charAt(i) == '/' || current.charAt(i) == '*' ||current.charAt(i) == '-' || current.charAt(i) == '+' || current.charAt(i) == '.')) {
+
+                isnumber = true;
+
+            }
+            else {
+
+                if(!isnumber) {
+                    return current;
+                }
+
+                isnumber = false;
+            }
+
+        }
+
+        if(isnumber) {
+
+            isResult = true;
+
+            return String.valueOf(ExprEval.eval(current));
+
+        }
+        else {
+            return current;
+        }
+
     }
 
     private void addDigit(View v) {
