@@ -11,10 +11,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,19 +46,19 @@ public class MainActivity extends AppCompatActivity {
         Button num0 = findViewById(R.id.num0);
 
 
-        Button plusbtn = findViewById(R.id.plusbtn);
-        Button multibtn = findViewById(R.id.multibtn);
-        Button minusbtn = findViewById(R.id.minusbtn);
-        Button divisionbtn = findViewById(R.id.divisionbtn);
-        Button equalbtn = findViewById(R.id.equalbtn);
+        Button plusBtn = findViewById(R.id.plusbtn);
+        Button multiBtn = findViewById(R.id.multibtn);
+        Button minusBtn = findViewById(R.id.minusbtn);
+        Button divisionBtn = findViewById(R.id.divisionbtn);
+        Button equalBtn = findViewById(R.id.equalbtn);
 
-        Button cleanbtn = findViewById(R.id.cleanbtn);
-        Button dotbtn = findViewById(R.id.dotbtn);
-        Button backbtn = findViewById(R.id.backbtn);
+        Button cleanBtn = findViewById(R.id.cleanbtn);
+        Button dotBtn = findViewById(R.id.dotbtn);
+        Button backBtn = findViewById(R.id.backbtn);
 
         result = findViewById(R.id.resultview);
 
-        View.OnClickListener l = v -> addDigit(v);;
+        View.OnClickListener l = this::addDigit;
 
         num0.setOnClickListener(l);
         num1.setOnClickListener(l);
@@ -73,15 +70,15 @@ public class MainActivity extends AppCompatActivity {
         num7.setOnClickListener(l);
         num8.setOnClickListener(l);
         num9.setOnClickListener(l);
-        minusbtn.setOnClickListener(l);
-        plusbtn.setOnClickListener(l);
-        dotbtn.setOnClickListener(l);
-        divisionbtn.setOnClickListener(l);
-        multibtn.setOnClickListener(l);
+        minusBtn.setOnClickListener(l);
+        plusBtn.setOnClickListener(l);
+        dotBtn.setOnClickListener(l);
+        divisionBtn.setOnClickListener(l);
+        multiBtn.setOnClickListener(l);
 
-        equalbtn.setOnClickListener(v -> result.setText(solve()));
-        cleanbtn.setOnClickListener(v -> result.setText(""));
-        backbtn.setOnClickListener(v -> deleteDigit());
+        equalBtn.setOnClickListener(v -> result.setText(solve()));
+        cleanBtn.setOnClickListener(v -> result.setText(""));
+        backBtn.setOnClickListener(v -> deleteDigit());
 
 
 
