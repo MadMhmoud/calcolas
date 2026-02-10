@@ -104,40 +104,74 @@ public class MainActivity extends AppCompatActivity {
 
     private String solve() {
 
-        String current = String.valueOf(result.getText());
-        boolean isnumber = false;
+        return (String.join(" | ", tokenize(result.getText().toString()))) ;
+    }
 
+    private ArrayList<String> tokenize(String expression) {
 
-        for (int i = 0 ; i < current.length() ; i++) {
+        expression = expression.trim();
+        ArrayList<String> tokens = new ArrayList<>();
 
-            if (!(current.charAt(i) == '/' || current.charAt(i) == '*' ||current.charAt(i) == '-' || current.charAt(i) == '+' || current.charAt(i) == '.')) {
+        if (expression.isEmpty()) return tokens;
 
-                isnumber = true;
+        StringBuilder number = new StringBuilder();
+
+        for (int i = 0; i < expression.length(); i++) {
+
+            char c = expression.charAt(i);
+
+            // skip spaces
+            if (Character.isWhitespace(c)) continue;
+
+            boolean isOperator = (c == '+' || c == '-' || c == '*' || c == '/');
+
+            // treat '-' as unary minus if it's at the start OR follows another operator
+            if (c == '-' && (tokens.isEmpty() && number.length() == 0)) {
+                number.append(c);
+                continue;
+            }
+            if (c == '-' && number.length() == 0 && !tokens.isEmpty()) {
+                String prev = tokens.get(tokens.size() - 1);
+                if (prev.equals("+") || prev.equals("-") || prev.equals("*") || prev.equals("/")) {
+                    number.append(c);
+                    continue;
+                }
+            }
+
+            if (isOperator) {
+
+                // flush current number
+                if (number.length() == 0) {
+                    throw new IllegalArgumentException("Wrong entry: operator without number at index " + i);
+                }
+                tokens.add(number.toString()); // adding the current number
+                number.setLength(0);
+
+                // add operator
+                tokens.add(String.valueOf(c));
 
             }
             else {
 
-                if(!isnumber) {
-                    return current;
+                // allow digits and dot
+                if (!(Character.isDigit(c) || c == '.')) {
+                    throw new IllegalArgumentException("Wrong entry: invalid char '" + c + "' at index " + i);
                 }
+                number.append(c);
 
-                isnumber = false;
             }
-
         }
 
-        if(isnumber) {
-
-            isResult = true;
-
-            return String.valueOf(ExprEval.eval(current));
-
+        // flush last number
+        if (number.length() == 0) {
+            throw new IllegalArgumentException("Wrong entry: ends with operator");
         }
-        else {
-            return current;
-        }
+        tokens.add(number.toString());
 
+        return tokens;
     }
+
+
 
     private void addDigit(View v) {
 
@@ -159,116 +193,4 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-}
-
-
-
-
-
-class ExprEval {
-
-    public static double eval(String expr) {
-        List<String> tokens = tokenize(expr);
-        List<String> rpn = toRpn(tokens);
-        return evalRpn(rpn);
-    }
-
-    private static List<String> tokenize(String s) {
-        List<String> out = new ArrayList<>();
-        int i = 0;
-
-        while (i < s.length()) {
-            char c = s.charAt(i);
-
-            if (Character.isWhitespace(c)) { i++; continue; }
-
-            if ("+-*/()".indexOf(c) >= 0) {
-                out.add(String.valueOf(c));
-                i++;
-                continue;
-            }
-
-            if (Character.isDigit(c) || c == '.') {
-                int start = i;
-                boolean dotSeen = (c == '.');
-                i++;
-                while (i < s.length()) {
-                    char d = s.charAt(i);
-                    if (Character.isDigit(d)) { i++; continue; }
-                    if (d == '.' && !dotSeen) { dotSeen = true; i++; continue; }
-                    break;
-                }
-                out.add(s.substring(start, i));
-                continue;
-            }
-
-            throw new IllegalArgumentException("Invalid char: " + c);
-        }
-
-        return out;
-    }
-
-    private static int prec(String op) {
-        return (op.equals("*") || op.equals("/")) ? 2 : 1;
-    }
-
-    private static boolean isOp(String t) {
-        return t.equals("+") || t.equals("-") || t.equals("*") || t.equals("/");
-    }
-
-    private static List<String> toRpn(List<String> tokens) {
-        List<String> out = new ArrayList<>();
-        Deque<String> ops = new ArrayDeque<>();
-
-        for (String t : tokens) {
-            if (isOp(t)) {
-                while (!ops.isEmpty() && isOp(ops.peek()) && prec(ops.peek()) >= prec(t)) {
-                    out.add(ops.pop());
-                }
-                ops.push(t);
-            } else if (t.equals("(")) {
-                ops.push(t);
-            } else if (t.equals(")")) {
-                while (!ops.isEmpty() && !ops.peek().equals("(")) out.add(ops.pop());
-                if (ops.isEmpty() || !ops.peek().equals("(")) throw new IllegalArgumentException("Mismatched parentheses");
-                ops.pop();
-            } else {
-                // number
-                out.add(t);
-            }
-        }
-
-        while (!ops.isEmpty()) {
-            String op = ops.pop();
-            if (op.equals("(") || op.equals(")")) throw new IllegalArgumentException("Mismatched parentheses");
-            out.add(op);
-        }
-
-        return out;
-    }
-
-    private static double evalRpn(List<String> rpn) {
-        Deque<Double> st = new ArrayDeque<>();
-
-        for (String t : rpn) {
-            if (!isOp(t)) {
-                st.push(Double.parseDouble(t));
-                continue;
-            }
-
-            if (st.size() < 2) throw new IllegalArgumentException("Bad expression");
-            double b = st.pop();
-            double a = st.pop();
-
-            switch (t) {
-                case "+": st.push(a + b); break;
-                case "-": st.push(a - b); break;
-                case "*": st.push(a * b); break;
-                case "/": st.push(a / b); break;
-            }
-        }
-
-        if (st.size() != 1) throw new IllegalArgumentException("Bad expression");
-        return st.pop();
-    }
 }
