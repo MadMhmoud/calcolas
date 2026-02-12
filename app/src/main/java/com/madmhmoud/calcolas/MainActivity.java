@@ -12,6 +12,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
     private String solve() {
 
-        return (String.join(" | ", tokenize(result.getText().toString()))) ;
+        return lastResult();
     }
 
     private ArrayList<String> tokenize(String expression) {
@@ -166,6 +167,95 @@ public class MainActivity extends AppCompatActivity {
         tokens.add(number.toString());
 
         return tokens;
+    }
+
+    private String lastResult() {
+
+        ArrayList<String> arrayTokenized = tokenize(result.getText().toString());
+
+        for(int i = 0 ; i < arrayTokenized.size() ; i++) { // the *
+
+            if(Objects.equals(arrayTokenized.get(i), "*")) {
+
+                double a =  Double.parseDouble(arrayTokenized.get(i - 1));
+                double b =  Double.parseDouble(arrayTokenized.get(i + 1));
+
+                double r = a * b;
+
+                arrayTokenized.set(i, String.valueOf(r));
+
+                arrayTokenized.remove(i + 1);
+                arrayTokenized.remove(i - 1);
+
+                i = 0;
+
+            }
+
+        }
+
+        for(int i = 0 ; i < arrayTokenized.size() ; i++) { // the /
+
+            if(Objects.equals(arrayTokenized.get(i), "/")) {
+
+                double a =  Double.parseDouble(arrayTokenized.get(i - 1));
+                double b =  Double.parseDouble(arrayTokenized.get(i + 1));
+
+                double r = a / b;
+
+                arrayTokenized.set(i, String.valueOf(r));
+
+                arrayTokenized.remove(i + 1);
+                arrayTokenized.remove(i - 1);
+
+                i = 0;
+
+            }
+
+        }
+
+        for(int i = 0 ; i < arrayTokenized.size() ; i++) { // the +
+
+            if(Objects.equals(arrayTokenized.get(i), "+")) {
+
+                double a =  Double.parseDouble(arrayTokenized.get(i - 1));
+                double b =  Double.parseDouble(arrayTokenized.get(i + 1));
+
+                double r = a + b;
+
+                arrayTokenized.set(i, String.valueOf(r));
+
+                arrayTokenized.remove(i + 1);
+                arrayTokenized.remove(i - 1);
+
+                i = 0;
+
+            }
+
+        }
+
+        for(int i = 0 ; i < arrayTokenized.size() ; i++) { // the -
+
+            if(Objects.equals(arrayTokenized.get(i), "-")) {
+
+                double a =  Double.parseDouble(arrayTokenized.get(i - 1));
+                double b =  Double.parseDouble(arrayTokenized.get(i + 1));
+
+                double r = a - b;
+
+                arrayTokenized.set(i, String.valueOf(r));
+
+                arrayTokenized.remove(i + 1);
+                arrayTokenized.remove(i - 1);
+
+                i = 0;
+
+            }
+
+        }
+
+        return arrayTokenized.get(0);
+
+
     }
 
 
