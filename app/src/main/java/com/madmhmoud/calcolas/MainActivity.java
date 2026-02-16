@@ -102,7 +102,14 @@ public class MainActivity extends AppCompatActivity {
 
     private String solve() {
 
-        return lastResult();
+        if(isValidExpression(result.getText().toString())) {
+            return lastResult();
+        }
+        else {
+            return "wrong syntax!";
+        }
+
+
     }
 
     private ArrayList<String> tokenize(String expression) {
@@ -258,6 +265,63 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public static boolean isValidExpression(String expr) {
+        if (expr == null || expr.isEmpty())
+            return false;
+
+        // Remove spaces
+        expr = expr.replaceAll("\\s+", "");
+
+        // Check allowed characters
+        if (!expr.matches("[0-9+\\-*/().]+"))
+            return false;
+
+        // Cannot start with * or /
+        if (expr.startsWith("*") || expr.startsWith("/"))
+            return false;
+
+        // Cannot end with operator or dot
+        if (expr.matches(".*[+\\-*/.]$"))
+            return false;
+
+        int parentheses = 0;
+        boolean lastWasOperator = false;
+        boolean lastWasDot = false;
+
+        for (int i = 0; i < expr.length(); i++) {
+            char c = expr.charAt(i);
+
+            if (c == '(') {
+                parentheses++;
+                lastWasOperator = false;
+            }
+            else if (c == ')') {
+                parentheses--;
+                if (parentheses < 0) return false;
+                lastWasOperator = false;
+            }
+            else if ("+-*/".indexOf(c) != -1) {
+                if (lastWasOperator)
+                    return false;
+
+                lastWasOperator = true;
+                lastWasDot = false;
+            }
+            else if (c == '.') {
+                if (lastWasDot)
+                    return false;
+
+                lastWasDot = true;
+                lastWasOperator = false;
+            }
+            else { // digit
+                lastWasOperator = false;
+                lastWasDot = false;
+            }
+        }
+
+        return parentheses == 0;
+    }
 
 
     private void addDigit(View v) {
