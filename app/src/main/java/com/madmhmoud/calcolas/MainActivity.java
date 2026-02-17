@@ -103,9 +103,15 @@ public class MainActivity extends AppCompatActivity {
     private String solve() {
 
         if(isValidExpression(result.getText().toString())) {
+
+            isResult = true;
+
             return lastResult();
         }
         else {
+
+            isResult = true;
+
             return "wrong syntax!";
         }
 
@@ -259,6 +265,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
+
+        isResult = true;
 
         return arrayTokenized.get(0);
 
