@@ -11,11 +11,28 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import java.util.ArrayList;
-import java.util.Objects;
+
 
 public class MainActivity extends AppCompatActivity {
 
+    Button num9;
+    Button num8;
+    Button num7;
+    Button num6;
+    Button num5;
+    Button num4;
+    Button num3;
+    Button num2;
+    Button num1;
+    Button num0;
+    Button plusBtn;
+    Button multiBtn;
+    Button minusBtn;
+    Button divisionBtn;
+    Button equalBtn;
+    Button cleanBtn;
+    Button dotBtn;
+    Button backBtn;
     TextView result;
 
     boolean isResult = false;
@@ -35,29 +52,35 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        Button num9 = findViewById(R.id.num9);
-        Button num8 = findViewById(R.id.num8);
-        Button num7 = findViewById(R.id.num7);
-        Button num6 = findViewById(R.id.num6);
-        Button num5 = findViewById(R.id.num5);
-        Button num4 = findViewById(R.id.num4);
-        Button num3 = findViewById(R.id.num3);
-        Button num2 = findViewById(R.id.num2);
-        Button num1 = findViewById(R.id.num1);
-        Button num0 = findViewById(R.id.num0);
+        num9 = findViewById(R.id.num9);
+        num8 = findViewById(R.id.num8);
+        num7 = findViewById(R.id.num7);
+        num6 = findViewById(R.id.num6);
+        num5 = findViewById(R.id.num5);
+        num4 = findViewById(R.id.num4);
+        num3 = findViewById(R.id.num3);
+        num2 = findViewById(R.id.num2);
+        num1 = findViewById(R.id.num1);
+        num0 = findViewById(R.id.num0);
 
 
-        Button plusBtn = findViewById(R.id.plusbtn);
-        Button multiBtn = findViewById(R.id.multibtn);
-        Button minusBtn = findViewById(R.id.minusbtn);
-        Button divisionBtn = findViewById(R.id.divisionbtn);
-        Button equalBtn = findViewById(R.id.equalbtn);
+        plusBtn = findViewById(R.id.plusbtn);
+        multiBtn = findViewById(R.id.multibtn);
+        minusBtn = findViewById(R.id.minusbtn);
+        divisionBtn = findViewById(R.id.divisionbtn);
+        equalBtn = findViewById(R.id.equalbtn);
 
-        Button cleanBtn = findViewById(R.id.cleanbtn);
-        Button dotBtn = findViewById(R.id.dotbtn);
-        Button backBtn = findViewById(R.id.backbtn);
+        cleanBtn = findViewById(R.id.cleanbtn);
+        dotBtn = findViewById(R.id.dotbtn);
+        backBtn = findViewById(R.id.backbtn);
 
         result = findViewById(R.id.resultview);
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
         View.OnClickListener l = this::addDigit;
 
@@ -71,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         num7.setOnClickListener(l);
         num8.setOnClickListener(l);
         num9.setOnClickListener(l);
+
         minusBtn.setOnClickListener(l);
         plusBtn.setOnClickListener(l);
         dotBtn.setOnClickListener(l);
@@ -81,13 +105,9 @@ public class MainActivity extends AppCompatActivity {
         cleanBtn.setOnClickListener(v -> result.setText(""));
         backBtn.setOnClickListener(v -> deleteDigit());
 
-
-
-
     }
 
     private void deleteDigit() {
-
 
         if(result.getText().length() > 0 && !isResult) {
 
@@ -102,233 +122,23 @@ public class MainActivity extends AppCompatActivity {
 
     private String solve() {
 
-        if(isValidExpression(result.getText().toString())) {
+        String problem = result.getText().toString();
+
+        if(madMath.isValidExpression(problem)) {
+
+            String hardResult = madMath.lastResult(problem);
 
             isResult = true;
 
-            return lastResult();
+            return hardResult;
+
         }
         else {
 
-            isResult = true;
-
-            return "wrong syntax!";
-        }
-
-
-    }
-
-    private ArrayList<String> tokenize(String expression) {
-
-        expression = expression.trim();
-        ArrayList<String> tokens = new ArrayList<>();
-
-        if (expression.isEmpty()) return tokens;
-
-        StringBuilder number = new StringBuilder();
-
-        for (int i = 0; i < expression.length(); i++) {
-
-            char c = expression.charAt(i);
-
-            // skip spaces
-            if (Character.isWhitespace(c)) continue;
-
-            boolean isOperator = (c == '+' || c == '-' || c == '*' || c == '/');
-
-            // treat '-' as unary minus if it's at the start OR follows another operator
-            if (c == '-' && (tokens.isEmpty() && number.length() == 0)) {
-                number.append(c);
-                continue;
-            }
-            if (c == '-' && number.length() == 0 && !tokens.isEmpty()) {
-                String prev = tokens.get(tokens.size() - 1);
-                if (prev.equals("+") || prev.equals("-") || prev.equals("*") || prev.equals("/")) {
-                    number.append(c);
-                    continue;
-                }
-            }
-
-            if (isOperator) {
-
-                // flush current number
-                if (number.length() == 0) {
-                    throw new IllegalArgumentException("Wrong entry: operator without number at index " + i);
-                }
-                tokens.add(number.toString()); // adding the current number
-                number.setLength(0);
-
-                // add operator
-                tokens.add(String.valueOf(c));
-
-            }
-            else {
-
-                // allow digits and dot
-                if (!(Character.isDigit(c) || c == '.')) {
-                    throw new IllegalArgumentException("Wrong entry: invalid char '" + c + "' at index " + i);
-                }
-                number.append(c);
-
-            }
-        }
-
-        // flush last number
-        if (number.length() == 0) {
-            throw new IllegalArgumentException("Wrong entry: ends with operator");
-        }
-        tokens.add(number.toString());
-
-        return tokens;
-    }
-
-    private String lastResult() {
-
-        ArrayList<String> arrayTokenized = tokenize(result.getText().toString());
-
-        for(int i = 0 ; i < arrayTokenized.size() ; i++) { // the *
-
-            if(Objects.equals(arrayTokenized.get(i), "*")) {
-
-                double a =  Double.parseDouble(arrayTokenized.get(i - 1));
-                double b =  Double.parseDouble(arrayTokenized.get(i + 1));
-
-                double r = a * b;
-
-                arrayTokenized.set(i, String.valueOf(r));
-
-                arrayTokenized.remove(i + 1);
-                arrayTokenized.remove(i - 1);
-
-                i = 0;
-
-            }
+            return "Wrong Syntax!";
 
         }
 
-        for(int i = 0 ; i < arrayTokenized.size() ; i++) { // the /
-
-            if(Objects.equals(arrayTokenized.get(i), "/")) {
-
-                double a =  Double.parseDouble(arrayTokenized.get(i - 1));
-                double b =  Double.parseDouble(arrayTokenized.get(i + 1));
-
-                double r = a / b;
-
-                arrayTokenized.set(i, String.valueOf(r));
-
-                arrayTokenized.remove(i + 1);
-                arrayTokenized.remove(i - 1);
-
-                i = 0;
-
-            }
-
-        }
-
-        for(int i = 0 ; i < arrayTokenized.size() ; i++) { // the +
-
-            if(Objects.equals(arrayTokenized.get(i), "+")) {
-
-                double a =  Double.parseDouble(arrayTokenized.get(i - 1));
-                double b =  Double.parseDouble(arrayTokenized.get(i + 1));
-
-                double r = a + b;
-
-                arrayTokenized.set(i, String.valueOf(r));
-
-                arrayTokenized.remove(i + 1);
-                arrayTokenized.remove(i - 1);
-
-                i = 0;
-
-            }
-
-        }
-
-        for(int i = 0 ; i < arrayTokenized.size() ; i++) { // the -
-
-            if(Objects.equals(arrayTokenized.get(i), "-")) {
-
-                double a =  Double.parseDouble(arrayTokenized.get(i - 1));
-                double b =  Double.parseDouble(arrayTokenized.get(i + 1));
-
-                double r = a - b;
-
-                arrayTokenized.set(i, String.valueOf(r));
-
-                arrayTokenized.remove(i + 1);
-                arrayTokenized.remove(i - 1);
-
-                i = 0;
-
-            }
-
-        }
-
-        isResult = true;
-
-        return arrayTokenized.get(0);
-
-
-    }
-
-    public static boolean isValidExpression(String expr) {
-        if (expr == null || expr.isEmpty())
-            return false;
-
-        // Remove spaces
-        expr = expr.replaceAll("\\s+", "");
-
-        // Check allowed characters
-        if (!expr.matches("[0-9+\\-*/().]+"))
-            return false;
-
-        // Cannot start with * or /
-        if (expr.startsWith("*") || expr.startsWith("/"))
-            return false;
-
-        // Cannot end with operator or dot
-        if (expr.matches(".*[+\\-*/.]$"))
-            return false;
-
-        int parentheses = 0;
-        boolean lastWasOperator = false;
-        boolean lastWasDot = false;
-
-        for (int i = 0; i < expr.length(); i++) {
-            char c = expr.charAt(i);
-
-            if (c == '(') {
-                parentheses++;
-                lastWasOperator = false;
-            }
-            else if (c == ')') {
-                parentheses--;
-                if (parentheses < 0) return false;
-                lastWasOperator = false;
-            }
-            else if ("+-*/".indexOf(c) != -1) {
-                if (lastWasOperator)
-                    return false;
-
-                lastWasOperator = true;
-                lastWasDot = false;
-            }
-            else if (c == '.') {
-                if (lastWasDot)
-                    return false;
-
-                lastWasDot = true;
-                lastWasOperator = false;
-            }
-            else { // digit
-                lastWasOperator = false;
-                lastWasDot = false;
-            }
-        }
-
-        return parentheses == 0;
     }
 
 
