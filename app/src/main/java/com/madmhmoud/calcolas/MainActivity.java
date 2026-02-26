@@ -1,5 +1,6 @@
 package com.madmhmoud.calcolas;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +12,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.Objects;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     Button dotBtn;
     Button backBtn;
     TextView result;
+    Button rotatebtn;
 
     boolean isResult = false;
 
@@ -75,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         backBtn = findViewById(R.id.backbtn);
 
         result = findViewById(R.id.resultview);
-
+        rotatebtn = findViewById(R.id.rotateBtn);
     }
 
     @Override
@@ -104,6 +107,26 @@ public class MainActivity extends AppCompatActivity {
         equalBtn.setOnClickListener(v -> result.setText(solve()));
         cleanBtn.setOnClickListener(v -> result.setText(""));
         backBtn.setOnClickListener(v -> deleteDigit());
+
+        rotatebtn.setOnClickListener(v -> {
+
+            Intent intent = new Intent(MainActivity.this, expandedActivity.class);
+
+            intent.putExtra("Result", result.getText().toString());
+
+            startActivity(intent);
+
+        });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        String val = getSharedPreferences("app", MODE_PRIVATE).getString("result", null);
+
+            result.setText(val);
 
     }
 
@@ -134,6 +157,8 @@ public class MainActivity extends AppCompatActivity {
 
         }
         else {
+
+            isResult = true;
 
             return "Wrong Syntax!";
 

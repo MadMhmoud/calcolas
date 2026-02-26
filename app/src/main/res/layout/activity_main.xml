@@ -204,6 +204,30 @@
         app:rippleColor="#B12121" />
 
     <Button
+        android:id="@+id/rotateBtn"
+        style="@style/Widget.MaterialComponents.TimePicker.Button"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:backgroundTint="#5B995D"
+        android:fontFamily="serif"
+        android:foregroundTint="#733030"
+        android:textColor="#000000"
+        android:textColorLink="#433C3C"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:icon="@android:drawable/stat_notify_sync"
+        app:iconGravity="textTop"
+        app:iconPadding="0dp"
+        app:iconSize="30dp"
+        app:iconTint="#020202"
+        app:iconTintMode="multiply"
+        app:layout_constraintBottom_toTopOf="@+id/multibtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:rippleColor="#000000" />
+
+    <Button
         android:id="@+id/num6"
         style="@style/Widget.MaterialComponents.TimePicker.Button"
         android:layout_width="110dp"
