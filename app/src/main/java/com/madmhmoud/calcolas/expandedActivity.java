@@ -25,6 +25,15 @@ public class expandedActivity extends AppCompatActivity {
     Button dig7;
     Button dig8;
     Button dig9;
+    Button dotbtn2;
+    Button rotatebtn2;
+    Button multibtn;
+    Button minusbtn;
+    Button divbtn;
+    Button plusbtn;
+    Button backdig;
+    Button equalDig;
+    Button cleanDig;
 
 
 
@@ -47,6 +56,18 @@ public class expandedActivity extends AppCompatActivity {
         dig7 = findViewById(R.id.dig7);
         dig8 = findViewById(R.id.dig8);
         dig9 = findViewById(R.id.dig9);
+        dotbtn2 = findViewById(R.id.dotbtn2);
+
+        rotatebtn2 = findViewById(R.id.rotatebtn2);
+        backdig = findViewById(R.id.backdig);
+        cleanDig = findViewById(R.id.cleandig);
+
+        divbtn = findViewById(R.id.divdig);
+        multibtn = findViewById(R.id.multidig);
+        plusbtn = findViewById(R.id.plusdig);
+        minusbtn = findViewById(R.id.minusdig);
+
+        equalDig = findViewById(R.id.equalDig);
 
     }
 
@@ -68,6 +89,20 @@ public class expandedActivity extends AppCompatActivity {
         dig7.setOnClickListener(l);
         dig8.setOnClickListener(l);
         dig9.setOnClickListener(l);
+        dotbtn2.setOnClickListener(l);
+
+        minusbtn.setOnClickListener(l);
+        plusbtn.setOnClickListener(l);
+        divbtn.setOnClickListener(l);
+        multibtn.setOnClickListener(l);
+
+        rotatebtn2.setOnClickListener(v -> flip());
+        backdig.setOnClickListener(v -> deleteDigit());
+        cleanDig.setOnClickListener(v -> result2.setText(""));
+
+
+        equalDig.setOnClickListener(v -> result2.setText(solve()));
+
 
 
 
@@ -77,6 +112,12 @@ public class expandedActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+
+        flip();
+
+    }
+
+    private void flip() {
 
         getSharedPreferences("app", MODE_PRIVATE)
                 .edit()
@@ -102,6 +143,42 @@ public class expandedActivity extends AppCompatActivity {
 
         }
 
+
+    }
+
+    private void deleteDigit() {
+
+        if(result2.getText().length() > 0 && !isResult) {
+
+            result2.setText(result2.getText().toString().substring(0, result2.getText().length() - 1));
+
+        } else {
+            result2.setText("");
+            isResult = false;
+        }
+
+    }
+
+    private String solve() {
+
+        String problem = result2.getText().toString();
+
+        if(madMath.isValidExpression(problem)) {
+
+            String hardResult = madMath.lastResult(problem);
+
+            isResult = true;
+
+            return hardResult;
+
+        }
+        else {
+
+            isResult = true;
+
+            return "Wrong Syntax!";
+
+        }
 
     }
 
