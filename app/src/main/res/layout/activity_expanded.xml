@@ -9,10 +9,138 @@
     tools:context=".expandedActivity">
 
 
+    <Button
+        android:id="@+id/dig2"
+        style="@style/Widget.MaterialComponents.TimePicker.Button"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:backgroundTint="#5B995D"
+        android:fontFamily="serif"
+        android:foregroundTint="#733030"
+        android:text="2"
+        android:textColor="#000000"
+        android:textColorLink="#433C3C"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/dig3" />
+
+    <Button
+        android:id="@+id/dig4"
+        style="@style/Widget.MaterialComponents.TimePicker.Button"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:backgroundTint="#5B995D"
+        android:fontFamily="serif"
+        android:foregroundTint="#733030"
+        android:text="4"
+        android:textColor="#000000"
+        android:textColorLink="#433C3C"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/dig1"
+        app:layout_constraintEnd_toStartOf="@+id/dig5" />
+
+    <Button
+        android:id="@+id/dig8"
+        style="@style/Widget.MaterialComponents.TimePicker.Button"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:backgroundTint="#5B995D"
+        android:fontFamily="serif"
+        android:foregroundTint="#733030"
+        android:text="8"
+        android:textColor="#000000"
+        android:textColorLink="#433C3C"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/dig5"
+        app:layout_constraintEnd_toStartOf="@+id/dig9" />
+
+    <Button
+        android:id="@+id/dig7"
+        style="@style/Widget.MaterialComponents.TimePicker.Button"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:backgroundTint="#5B995D"
+        android:fontFamily="serif"
+        android:foregroundTint="#733030"
+        android:text="7"
+        android:textColor="#000000"
+        android:textColorLink="#433C3C"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/dig4"
+        app:layout_constraintEnd_toStartOf="@+id/dig8" />
+
+    <Button
+        android:id="@+id/dig9"
+        style="@style/Widget.MaterialComponents.TimePicker.Button"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:backgroundTint="#5B995D"
+        android:fontFamily="serif"
+        android:foregroundTint="#733030"
+        android:text="9"
+        android:textColor="#000000"
+        android:textColorLink="#433C3C"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/dig6"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/dig5"
+        style="@style/Widget.MaterialComponents.TimePicker.Button"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:backgroundTint="#5B995D"
+        android:fontFamily="serif"
+        android:foregroundTint="#733030"
+        android:text="5"
+        android:textColor="#000000"
+        android:textColorLink="#433C3C"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/dig2"
+        app:layout_constraintEnd_toStartOf="@+id/dig6" />
+
+    <Button
+        android:id="@+id/dig6"
+        style="@style/Widget.MaterialComponents.TimePicker.Button"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:backgroundTint="#5B995D"
+        android:fontFamily="serif"
+        android:foregroundTint="#733030"
+        android:text="6"
+        android:textColor="#000000"
+        android:textColorLink="#433C3C"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/dig3"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/dig1"
+        style="@style/Widget.MaterialComponents.TimePicker.Button"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:backgroundTint="#5B995D"
+        android:fontFamily="serif"
+        android:foregroundTint="#733030"
+        android:text="1"
+        android:textColor="#000000"
+        android:textColorLink="#433C3C"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/dig2" />
+
     <TextView
         android:id="@+id/result2"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="140dp"
         android:paddingTop="20dp"
         android:text="2572"
         android:textColor="#FFFFFF"
@@ -20,4 +148,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/dig0"
+        style="@style/Widget.MaterialComponents.TimePicker.Button"
+        android:layout_width="70dp"
+        android:layout_height="140dp"
+        android:backgroundTint="#5B995D"
+        android:fontFamily="serif"
+        android:foregroundTint="#733030"
+        android:text="0"
+        android:textColor="#000000"
+        android:textColorLink="#433C3C"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/dig1" />
+
+    <Button
+        android:id="@+id/dig3"
+        style="@style/Widget.MaterialComponents.TimePicker.Button"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:backgroundTint="#5B995D"
+        android:fontFamily="serif"
+        android:foregroundTint="#733030"
+        android:text="3"
+        android:textColor="#000000"
+        android:textColorLink="#433C3C"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
