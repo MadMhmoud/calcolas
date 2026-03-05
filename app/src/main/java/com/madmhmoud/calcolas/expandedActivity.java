@@ -34,6 +34,9 @@ public class expandedActivity extends AppCompatActivity {
     Button backdig;
     Button equalDig;
     Button cleanDig;
+    Button bowLeft;
+    Button bowRight;
+    Button powerBtn;
 
 
 
@@ -61,11 +64,14 @@ public class expandedActivity extends AppCompatActivity {
         rotatebtn2 = findViewById(R.id.rotatebtn2);
         backdig = findViewById(R.id.backdig);
         cleanDig = findViewById(R.id.cleandig);
+        bowLeft = findViewById(R.id.bowleft);
+        bowRight = findViewById(R.id.bowRight);
 
         divbtn = findViewById(R.id.divdig);
         multibtn = findViewById(R.id.multidig);
         plusbtn = findViewById(R.id.plusdig);
         minusbtn = findViewById(R.id.minusdig);
+        powerBtn = findViewById(R.id.powerBtn);
 
         equalDig = findViewById(R.id.equalDig);
 

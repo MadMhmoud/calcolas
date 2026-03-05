@@ -10,6 +10,22 @@
 
 
     <Button
+        android:id="@+id/powerBtn"
+        style="@style/Widget.MaterialComponents.TimePicker.Button"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:backgroundTint="#313531"
+        android:fontFamily="serif"
+        android:foregroundTint="#733030"
+        android:text="^"
+        android:textColor="#FFFFFF"
+        android:textColorLink="#433C3C"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/bowleft"
+        app:layout_constraintStart_toEndOf="@+id/multidig" />
+
+    <Button
         android:id="@+id/backdig"
         style="@style/Widget.MaterialComponents.TimePicker.Button"
         android:layout_width="70dp"
@@ -60,6 +76,38 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/minusdig"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/bowleft"
+        style="@style/Widget.MaterialComponents.TimePicker.Button"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:backgroundTint="#313531"
+        android:fontFamily="serif"
+        android:foregroundTint="#733030"
+        android:text="("
+        android:textColor="#FFFFFF"
+        android:textColorLink="#433C3C"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/divdig" />
+
+    <Button
+        android:id="@+id/bowRight"
+        style="@style/Widget.MaterialComponents.TimePicker.Button"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:backgroundTint="#313531"
+        android:fontFamily="serif"
+        android:foregroundTint="#733030"
+        android:text=")"
+        android:textColor="#FFFFFF"
+        android:textColorLink="#433C3C"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bowleft" />
 
     <Button
         android:id="@+id/minusdig"
