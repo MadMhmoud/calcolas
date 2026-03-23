@@ -147,22 +147,7 @@ public class MainActivity extends AppCompatActivity {
 
         String problem = result.getText().toString();
 
-        if(madMath.isValidExpression(problem)) {
-
-            String hardResult = madMath.lastResult(problem);
-
-            isResult = true;
-
-            return hardResult;
-
-        }
-        else {
-
-            isResult = true;
-
-            return "Wrong Syntax!";
-
-        }
+        return MadMath.solveStringSafe(problem);
 
     }
 

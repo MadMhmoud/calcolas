@@ -101,11 +101,14 @@ public class expandedActivity extends AppCompatActivity {
         plusbtn.setOnClickListener(l);
         divbtn.setOnClickListener(l);
         multibtn.setOnClickListener(l);
+        powerBtn.setOnClickListener(l);
 
         rotatebtn2.setOnClickListener(v -> flip());
         backdig.setOnClickListener(v -> deleteDigit());
         cleanDig.setOnClickListener(v -> result2.setText(""));
 
+        bowRight.setOnClickListener(l);
+        bowLeft.setOnClickListener(l);
 
         equalDig.setOnClickListener(v -> result2.setText(solve()));
 
@@ -169,22 +172,8 @@ public class expandedActivity extends AppCompatActivity {
 
         String problem = result2.getText().toString();
 
-        if(madMath.isValidExpression(problem)) {
+        return MadMath.solveStringSafe(problem);
 
-            String hardResult = madMath.lastResult(problem);
-
-            isResult = true;
-
-            return hardResult;
-
-        }
-        else {
-
-            isResult = true;
-
-            return "Wrong Syntax!";
-
-        }
 
     }
 
