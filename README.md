@@ -30,7 +30,9 @@ The application focuses on correctness, maintainability, and user experience.
   - Subtraction
   - Multiplication
   - Division
+  - Exponentiation
 - Decimal number support
+- Scientific Mode 
 - Clear / Reset functionality
 - Responsive layout for different phone screen sizes
 - Input validation
@@ -58,7 +60,7 @@ The application focuses on correctness, maintainability, and user experience.
 
 ## Future Improvements
 
-- Scientific calculator mode
+- ✅ Scientific calculator mode
 - Dark / Light theme support
 - Calculation history
 - Expression parser with operator precedence
