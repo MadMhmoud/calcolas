@@ -61,7 +61,7 @@ The application focuses on correctness, maintainability, and user experience.
 ## Future Improvements
 
 - ✅ Scientific calculator mode
-- Dark / Light theme support
+- ✅ Dark / Light theme support
 - Calculation history
 - Expression parser with operator precedence
 - MVVM architecture implementation
