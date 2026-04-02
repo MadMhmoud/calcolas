@@ -4,15 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import java.util.Objects;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     Button backBtn;
     TextView result;
     Button rotatebtn;
+
+    Button themeBtn;
 
     boolean isResult = false;
 
@@ -79,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
 
         result = findViewById(R.id.resultview);
         rotatebtn = findViewById(R.id.rotateBtn);
+
+        themeBtn = findViewById(R.id.themeBtn);
     }
 
     @Override
@@ -115,6 +120,31 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("Result", result.getText().toString());
 
             startActivity(intent);
+
+        });
+
+
+        themeBtn.setOnClickListener(v -> {
+
+            PopupMenu popup = new PopupMenu(MainActivity.this, v);
+            popup.getMenuInflater().inflate(R.menu.theme_menu, popup.getMenu());
+
+            popup.setOnMenuItemClickListener(item -> {
+
+                if(item.getItemId() == R.id.light_mode) {
+                    setLightMode();
+                    return true;
+                }
+                else if(item.getItemId() == R.id.dark_mode) {
+                    setDarkMode();
+                    return true;
+                }
+
+                return false;
+
+            });
+
+            popup.show();
 
         });
 
@@ -167,7 +197,17 @@ public class MainActivity extends AppCompatActivity {
             isResult = false;
 
         }
+    }
 
+    private void setLightMode() {
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+    }
+
+    private void setDarkMode() {
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
     }
 

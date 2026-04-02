@@ -3,10 +3,12 @@ package com.madmhmoud.calcolas;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 
 public class expandedActivity extends AppCompatActivity {
@@ -37,6 +39,7 @@ public class expandedActivity extends AppCompatActivity {
     Button bowLeft;
     Button bowRight;
     Button powerBtn;
+    Button themeBtn2;
 
 
 
@@ -75,6 +78,8 @@ public class expandedActivity extends AppCompatActivity {
 
         equalDig = findViewById(R.id.equalDig);
 
+        themeBtn2 = findViewById(R.id.themeBtn2);
+
     }
 
     @Override
@@ -112,6 +117,29 @@ public class expandedActivity extends AppCompatActivity {
 
         equalDig.setOnClickListener(v -> result2.setText(solve()));
 
+        themeBtn2.setOnClickListener(v -> {
+
+            PopupMenu popup = new PopupMenu(expandedActivity.this, v);
+            popup.getMenuInflater().inflate(R.menu.theme_menu, popup.getMenu());
+
+            popup.setOnMenuItemClickListener(item -> {
+
+                if(item.getItemId() == R.id.light_mode) {
+                    setLightMode();
+                    return true;
+                }
+                else if(item.getItemId() == R.id.dark_mode) {
+                    setDarkMode();
+                    return true;
+                }
+
+                return false;
+
+            });
+
+            popup.show();
+
+        });
 
 
 
@@ -174,6 +202,18 @@ public class expandedActivity extends AppCompatActivity {
 
         return MadMath.solveStringSafe(problem);
 
+
+    }
+
+    private void setLightMode() {
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+    }
+
+    private void setDarkMode() {
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
     }
 
